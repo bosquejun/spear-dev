@@ -1,0 +1,15 @@
+{
+	"files": [],
+	"references": [
+		{ "path": "./tsconfig.app.json" },
+		{ "path": "./tsconfig.node.json" }
+	],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@app/*": ["./src/app/*"],
+			"@spear/design-system": ["../design-system/src/index.ts"],
+			"@spear/design-system/*": ["../design-system/src/*"]
+		}
+	}
+}

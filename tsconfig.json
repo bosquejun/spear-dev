@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": ".",
+		"paths": {
+			"@spear/design-system": ["packages/design-system/src/index.tsx"],
+			"@spear/design-system/*": ["./packages/design-system/src/*"]
+		}
+	}
+}
