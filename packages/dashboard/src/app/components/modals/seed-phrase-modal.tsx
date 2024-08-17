@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
 	Button,
 	Chip,
@@ -14,6 +15,9 @@ import { Copy, Download } from "lucide-react";
 import { toast } from "sonner";
 import { useUser } from "@app/contexts/user-context";
 import { getRandomElements, shuffleArray } from "@app/utils/array";
+
+// @ts-ignore
+// import initializeSpearCore from "@spear/core";
 
 function MainView({
 	onCreate,
@@ -41,7 +45,14 @@ function MainView({
 	);
 }
 
-function SetupView({ onBack }: { onBack: () => void }) {
+function SetupView({
+	onBack,
+	onComplete,
+}: {
+	onBack: () => void;
+	onComplete: () => void;
+}) {
+	const { createNewAccount, verifySeedPhrase } = useUser();
 	const [state, setState] = useState<{
 		seedPhrase: string;
 		step: number;
@@ -67,16 +78,33 @@ function SetupView({ onBack }: { onBack: () => void }) {
 	const loading = Boolean(seedPhrase === "");
 
 	useEffect(() => {
+		const seedPhrase = createNewAccount();
 		setTimeout(function () {
 			setState({
 				...state,
-				seedPhrase:
-					"only start genius female prison corn human major track nation unusual excess tuition penalty black cotton defense useless finish small very cereal fiction recall",
+				seedPhrase,
 			});
-		}, 100);
+		}, 500);
 	}, []);
 
+	const isVerified = useMemo(() => {
+		if (loading) return false;
+
+		const verified = verifySeedPhrase(
+			seedPhrase,
+			toVerifyIndexes,
+			verifyPhrases
+		);
+
+		return verified;
+	}, [toVerifyIndexes, verifyPhrases, seedPhrase, loading]);
+
 	const proceedVerification = () => {
+		if (isVerified || verifyPhrases.length === 4) {
+			onComplete();
+			return;
+		}
+
 		const count = 4;
 		const phrases = [...seedPhrase.split(" ")];
 		const verifyPhrase = getRandomElements(phrases, count);
@@ -95,19 +123,6 @@ function SetupView({ onBack }: { onBack: () => void }) {
 			step: 1,
 		});
 	};
-
-	const isVerified = useMemo(() => {
-		const list = seedPhrase.split(" ");
-		if (toVerifyIndexes.length !== verifyPhrases.length || loading)
-			return false;
-
-		const verified = verifyPhrases.every((phrase, i) => {
-			const positionedPhrase = list[toVerifyIndexes[i] - 1];
-			return positionedPhrase === phrase;
-		});
-
-		return verified;
-	}, [toVerifyIndexes, verifyPhrases, seedPhrase, loading]);
 
 	return (
 		<DialogContent hideCloseIcon className='max-w-xl'>
@@ -202,12 +217,17 @@ function SetupView({ onBack }: { onBack: () => void }) {
 				</Show>
 				<Show>
 					<Show.When isTrue={step === 0}>
-						<div className='grid gap-2'>
+						<div className='grid gap-2 grid-cols-2'>
+							<Button variant='ghost' disabled>
+								<Download className='h-4 w-4 mr-2' />
+								Download
+							</Button>
 							<Button
-								variant='outline'
+								variant='ghost'
 								onClick={() => {
 									navigator.clipboard.writeText(
-										seedPhrase.split(" ").join("\n")
+										// seedPhrase.split(" ").join("\n")
+										seedPhrase
 									);
 									toast("Copied seed phrase", {
 										duration: 2000,
@@ -217,10 +237,6 @@ function SetupView({ onBack }: { onBack: () => void }) {
 							>
 								<Copy className='h-4 w-4 mr-2' />
 								Copy
-							</Button>
-							<Button variant='outline' disabled>
-								<Download className='h-4 w-4 mr-2' />
-								Download
 							</Button>
 						</div>
 					</Show.When>
@@ -232,7 +248,8 @@ function SetupView({ onBack }: { onBack: () => void }) {
 				</Button>
 				<Button
 					onClick={proceedVerification}
-					disabled={!seedPhrase || (!isVerified && step === 1)}
+					// disabled={!seedPhrase || (!isVerified && step === 1)}
+					disabled={!seedPhrase}
 				>
 					Next
 				</Button>
@@ -243,15 +260,19 @@ function SetupView({ onBack }: { onBack: () => void }) {
 
 export default function SeedPhraseModal() {
 	const { init } = useUser();
+	const [showModal, setShowModal] = useState(init);
 	const [view, setView] = useState<"main" | "setup" | "import">("main");
 
 	return (
-		<Dialog open={init}>
+		<Dialog open={showModal}>
 			<Show>
 				<Show.When isTrue={view === "setup"}>
 					<SetupView
 						onBack={() => {
 							setView("main");
+						}}
+						onComplete={() => {
+							setShowModal(false);
 						}}
 					/>
 				</Show.When>

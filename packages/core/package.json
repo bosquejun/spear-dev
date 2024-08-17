@@ -1,0 +1,27 @@
+{
+	"name": "@spear/core",
+	"version": "0.0.1",
+	"main": "dist/index.js",
+	"scripts": {
+		"dev": "echo 'Add dev script here'",
+		"build": "tsup",
+		"test": "echo 'Add test script here'",
+		"lint": "echo 'Add lint script here'"
+	},
+	"devDependencies": {
+		"@spear/eslint-config": "*",
+		"@spear/typescript-config": "*",
+		"@types/b4a": "^1.6.4",
+		"@types/bip39": "^3.0.0",
+		"@types/node": "^22.3.0",
+		"tsc": "^2.0.4",
+		"tsup": "^8.2.4"
+	},
+	"dependencies": {
+		"b4a": "^1.6.6",
+		"bip39": "^3.1.0",
+		"corestore": "^6.18.4",
+		"hypercore": "^10.37.17",
+		"hyperswarm": "^4.8.2"
+	}
+}

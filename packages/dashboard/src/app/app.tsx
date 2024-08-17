@@ -1,9 +1,11 @@
 import MainLayout from "./layout/main-layout";
+import AppRouterProvider from "./providers/router-provider";
 
 export function App() {
 	return (
 		<MainLayout>
-			<div>Test</div>
+			<AppRouterProvider />
+			{/* <BrowsePage /> */}
 		</MainLayout>
 	);
 }

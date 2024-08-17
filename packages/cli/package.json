@@ -1,0 +1,32 @@
+{
+	"name": "@spear/cli",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "echo 'Add dev script here'",
+		"start": "ts-node src/index.ts",
+		"build": "rimraf dist && tsc",
+		"test": "echo 'Add test script here'",
+		"lint": "echo 'Add lint script here'"
+	},
+	"dependencies": {
+		"@spear/sdk": "^0.0.1",
+		"dotenv": "^16.4.5",
+		"fs-exists-cached": "^1.0.0",
+		"meant": "^2.0.1",
+		"resolve-cwd": "^3.0.0",
+		"ts-node": "^10.9.2",
+		"yargs": "^17.7.2"
+	},
+	"bin": {
+		"spear": "./cli.js"
+	},
+	"devDependencies": {
+		"@spear/eslint-config": "*",
+		"@spear/typescript-config": "*",
+		"@types/node": "^22.3.0",
+		"@types/yargs": "^17.0.33",
+		"fs-exists-cached": "^1.0.0",
+		"ts-node": "^10.9.2"
+	}
+}

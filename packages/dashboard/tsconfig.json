@@ -6,6 +6,7 @@
 	],
 	"compilerOptions": {
 		"baseUrl": ".",
+		"module": "CommonJS",
 		"paths": {
 			"@app/*": ["./src/app/*"],
 			"@spear/design-system": ["../design-system/src/index.ts"],

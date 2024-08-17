@@ -4,7 +4,10 @@
 		"baseUrl": ".",
 		"paths": {
 			"@spear/design-system": ["packages/design-system/src/index.tsx"],
-			"@spear/design-system/*": ["./packages/design-system/src/*"]
+			"@spear/design-system/*": ["./packages/design-system/src/*"],
+			"@spear/cli": ["packages/cli/src/index.ts"],
+			"@spear/sdk": ["packages/sdk/src/index.ts"],
+			"@spear/sdk/*": ["packages/sdk/src/*"]
 		}
 	}
 }
