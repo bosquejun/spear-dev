@@ -1,3 +1,4 @@
+import { useMetamask } from "@app/contexts/metamask-context";
 import {
 	Button,
 	Card,
@@ -15,6 +16,7 @@ import {
 } from "@spear/design-system";
 
 export default function HomeContent() {
+	const { connect } = useMetamask();
 	return (
 		<Tabs defaultValue='account' className='w-full gap-3 flex flex-col'>
 			<TabsList className='grid w-full grid-cols-2 max-w-[40%]'>
@@ -41,7 +43,13 @@ export default function HomeContent() {
 						</div>
 					</CardContent>
 					<CardFooter>
-						<Button>Save changes</Button>
+						<Button
+							onClick={() => {
+								connect();
+							}}
+						>
+							Save changes
+						</Button>
 					</CardFooter>
 				</Card>
 			</TabsContent>

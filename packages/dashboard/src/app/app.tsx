@@ -1,11 +1,12 @@
 import MainLayout from "./layout/main-layout";
-import AppRouterProvider from "./providers/router-provider";
+import HomeContent from "./pages/home/content";
 
 export function App() {
 	return (
 		<MainLayout>
-			<AppRouterProvider />
+			{/* <AppRouterProvider /> */}
 			{/* <BrowsePage /> */}
+			<HomeContent />
 		</MainLayout>
 	);
 }

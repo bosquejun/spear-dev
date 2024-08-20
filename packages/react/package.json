@@ -1,0 +1,30 @@
+{
+	"name": "@spear/react",
+	"version": "0.0.0",
+	"private": true,
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "rollup -c",
+		"clean": "rm -rf dist"
+	},
+	"dependencies": {
+		"@hyperswarm/rpc": "^3.3.2",
+		"hyperbee": "^2.20.0",
+		"hypercore": "^10.37.18",
+		"hyperswarm": "^4.8.2",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^26.0.1",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"@rollup/plugin-typescript": "^11.1.6",
+		"@types/node": "^22.4.1",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"rollup": "^4.21.0",
+		"typescript": "^5.5.4"
+	}
+}
